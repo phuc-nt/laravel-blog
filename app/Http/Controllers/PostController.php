@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Post;
+
 class PostController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //return view('pages.welcome');
     }
 
     /**
@@ -37,7 +39,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate data
+        $this->validate($request, [
+                'title' => 'required|max:255',
+                'body' => 'required'
+            ]);
+
+        //store in database
+        $post = new Post;
+
+        $post->title = $request->title;
+        $post->body = $request->body;
+
+        $post->save();
+
+        //redirect to another page
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
@@ -48,7 +65,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

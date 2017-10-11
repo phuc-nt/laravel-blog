@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="jumbotron">
-        <h1>Hello, I'm {{ $data['fullname'] }}!</h1>
+        <h1>Hello, I'm PHUC!</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias ex, facere aliquid magnam illo pariatur vel, vitae iusto nostrum at! Placeat architecto eum ipsam a suscipit! Repellat vero esse dolore, deleniti ipsa! Non nihil saepe autem tempora asperiores laboriosam animi odit, mollitia nemo officia repellendus iste, eos dolor possimus harum.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Lastest post</a></p>
       </div>
