@@ -68,7 +68,11 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('posts.show');
+        // get Post by id
+        $post = Post::find($id);
+
+        // redirect to Show page with Post
+        return view('posts.show')->with('post', $post);
     }
 
     /**
