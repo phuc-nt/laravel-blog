@@ -83,7 +83,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        // get Post by id
+        $post = Post::find($id);
+
+        // redirect to Edit page with Post
+        return view('posts.edit')->with('post', $post);
     }
 
     /**
@@ -106,7 +110,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // get Post by id
+        $post = Post::find($id);
+
+        // delete Post from DB
+        //$post->delete();
+
+        // redirect to Welcome page
+        return view('pages.index');
     }
     
 }
