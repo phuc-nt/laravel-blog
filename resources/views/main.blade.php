@@ -9,6 +9,7 @@
     @include('partials._nav')
     <!-- Container -->
     <div class="container">
+      @include('partials._message')
 
       @yield('content')
 
