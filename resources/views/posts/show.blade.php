@@ -32,11 +32,15 @@
 			<hr>
 			<div class="row">
 				<div class="col-sm-6">
+					<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-block">Edit</a>
+					
+					<!--
 					{!!  Html::linkRoute(	'posts.edit', 
 											'Edit', 
 											[$post->id], 
 											['class' => 'btn btn-primary btn-block']) 
 					!!}
+					-->
 				</div>
 				<div class="col-sm-6">
 					{!!  Html::linkRoute(	'posts.destroy', 
