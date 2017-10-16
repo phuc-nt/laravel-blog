@@ -59,7 +59,7 @@ class PostController extends Controller
         $post->save();
 
         //set flash data with success message
-        Session::flash('success', 'The post was successfully save');
+        Session::flash('success', 'The post was successfully saved');
 
         //redirect to another page
         return redirect()->route('posts.show', $post->id);
@@ -119,7 +119,7 @@ class PostController extends Controller
         $post->save();
 
         //set flash data with success message
-        Session::flash('success', 'The post was successfully update');
+        Session::flash('success', 'The post was successfully updated');
 
         //redirect to another page
         return redirect()->route('posts.show', $post->id);
@@ -137,10 +137,13 @@ class PostController extends Controller
         $post = Post::find($id);
 
         // delete Post from DB
-        //$post->delete();
+        $post->delete();
+
+        //set flash data with success message
+        Session::flash('success', 'The post ' . $id . ' was successfully deleted');
 
         // redirect to Welcome page
-        return view('pages.index');
+        return redirect()->route('posts.index');
     }
     
 }
