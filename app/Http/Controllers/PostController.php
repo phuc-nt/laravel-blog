@@ -20,7 +20,7 @@ class PostController extends Controller
     public function index()
     {
         // get all Posts
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
 
         // redirect to Index page with all Posts
         return view('posts.index')->with('posts', $posts);
