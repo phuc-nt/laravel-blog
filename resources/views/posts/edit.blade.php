@@ -10,7 +10,7 @@
 	
 <div class="row">
 	
-	{!! Form::model($post, ['route' => ['posts.update', $post->id], 'data-parsley-validate' => '']) !!}
+	{!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'data-parsley-validate' => '']) !!}
 		<!-- Post contents -->
 	   	<div class="col-md-8">
 	   		{{ Form::label('title', 'Title:') }}
@@ -51,5 +51,5 @@
 @endsection
 
 @section('scripts')
-
+	{!! Html::script('js/parsley.min.js') !!}
 @endsection

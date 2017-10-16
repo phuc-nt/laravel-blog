@@ -58,6 +58,7 @@ class PostController extends Controller
 
         $post->save();
 
+        //set flash data with success message
         Session::flash('success', 'The post was successfully save');
 
         //redirect to another page
@@ -103,7 +104,25 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate data
+        $this->validate($request, [
+                'title' => 'required|max:255',
+                'body' => 'required'
+            ]);
+
+        //update in database
+        $post = Post::find($id);
+
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+
+        $post->save();
+
+        //set flash data with success message
+        Session::flash('success', 'The post was successfully update');
+
+        //redirect to another page
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
