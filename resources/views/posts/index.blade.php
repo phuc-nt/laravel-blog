@@ -48,11 +48,10 @@
 						<td>{{ date('D y/n/j h:m', strtotime($post->created_at)) }}</td>
 						<td>{{ date('D y/n/j h:m', strtotime($post->updated_at)) }}</td>
 						<td>
-							{!! Html::linkRoute('posts.show', 'View', [$post->id], ['class' => 'btn btn-sm btn-success']) !!}
+							<a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-success">View</a>
+							{{-- 
+							{!! Html::linkRoute('posts.show', 'View', [$post->id], ['class' => 'btn btn-sm btn-success']) !!} --}}
 							{!! Html::linkRoute('posts.edit', 'Edit', [$post->id], ['class' => 'btn btn-sm btn-primary']) !!}
-							<!--
-							{!! Html::linkRoute('posts.destroy', 'Delete', [$post->id], ['class' => 'btn btn-sm btn-danger']) !!}
-							-->
 						</td>
 					</tr>
 

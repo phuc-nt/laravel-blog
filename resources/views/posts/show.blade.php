@@ -49,6 +49,10 @@
  					{!! Form::close() !!}
 
 				</div>
+				<hr>
+				<div class="col-sm-12">
+					<a href="{{ route('posts.index') }}" class="btn btn-default btn-block"><< Show All Posts</a>
+				</div>
 			</div>
 
 		</div>

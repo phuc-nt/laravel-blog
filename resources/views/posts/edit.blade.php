@@ -36,10 +36,14 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-6">
-						<a href="{{ route('posts.show', $post->id) }}" class="btn btn-danger btn-block">Cancel</a>
+						<a href="{{ route('posts.show', $post->id) }}" class="btn btn-default btn-block">Cancel</a>
 					</div>
 					<div class="col-sm-6">
 						{{ Form::submit('Save Changes', ['class' => 'btn btn-success btn-block' ]) }}
+					</div>
+					<hr>
+					<div class="col-sm-12">
+						<a href="{{ route('posts.index') }}" class="btn btn-default btn-block"><< Show All Posts</a>
 					</div>
 				</div>
 
