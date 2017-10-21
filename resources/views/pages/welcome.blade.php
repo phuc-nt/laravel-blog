@@ -26,7 +26,7 @@
       @foreach ($posts as $post)
         <div class="post">
           <h3>{{ $post->title }}</h3>
-          <p>{{ substr($post->body, 0, 300) }}{{ strlen($post->body) > 300 ? "..." : "" }}</p>
+          <p>{{ mb_substr($post->body, 0, 300) }}{{ strlen($post->body) > 300 ? "..." : "" }}</p>
           <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Read more</a>
         </div>
 
@@ -47,4 +47,3 @@
     //confirm('haha');
   </script>
 @endsection
-
