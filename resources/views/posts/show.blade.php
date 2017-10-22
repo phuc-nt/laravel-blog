@@ -19,28 +19,26 @@
 	<!-- Side bar -->
 	<div class="col-md-4">
 		<div class="well">
+			<dl class="dl-horizontal">
+				<label>Url:</label>
+				<p><a href="{{ url($post->slug) }}">{{ url($post->slug) }}</a></p>
+			</dl>
 	     	
 			<dl class="dl-horizontal">
-				<dt>Create At:</dt>
-				<dd>{{ date('D y/n/j h:m', strtotime($post->created_at)) }}</dd>
+				<label>Create At:</label>
+				<p>{{ date('D y/n/j h:m', strtotime($post->created_at)) }}</p>
 			</dl>
 
 			<dl class="dl-horizontal">
-				<dt>Last Updated At:</dt>
-				<dd>{{ date('D y/n/j h:m', strtotime($post->updated_at)) }}</dd>
+				<label>Last Updated At:</label>
+				<p>{{ date('D y/n/j h:m', strtotime($post->updated_at)) }}</p>
 			</dl>
 			<hr>
 			<div class="row">
 				<div class="col-sm-6">
 					<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-block">Edit</a>
-					
-					<!--
-					{!!  Html::linkRoute(	'posts.edit', 
-											'Edit', 
-											[$post->id], 
-											['class' => 'btn btn-primary btn-block']) 
-					!!}
-					-->
+					{{-- 
+					{!!  Html::linkRoute('posts.edit', 'Edit', [$post->id], ['class' => 'btn btn-primary btn-block']) !!} --}}
 				</div>
 				<div class="col-sm-6">
 

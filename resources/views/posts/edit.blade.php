@@ -16,6 +16,9 @@
 	   		{{ Form::label('title', 'Title:') }}
 			{{ Form::text('title', null, ['class' => 'form-control input-lg', 'required' => '', 'maxlength' => '225' ]) }}
 
+			{{ Form::label('slug', 'Slug: ', ['class' => 'form-spacing-top']) }}
+			{{ Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '225' ]) }}
+
 			{{ Form::label('body', 'Body:', ['class' => 'form-spacing-top']) }}
 			{{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '' ]) }}
 		</div>
@@ -23,15 +26,19 @@
 		<!-- Side bar -->
 		<div class="col-md-4">
 			<div class="well">
+		     	<dl class="dl-horizontal">
+					<label>Url:</label>
+					<p><a href="{{ url($post->slug) }}">{{ url($post->slug) }}</a></p>
+				</dl>
 		     	
 				<dl class="dl-horizontal">
-					<dt>Create At:</dt>
-					<dd>{{ date('D y/n/j h:m', strtotime($post->created_at)) }}</dd>
+					<label>Create At:</label>
+					<p>{{ date('D y/n/j h:m', strtotime($post->created_at)) }}</p>
 				</dl>
 
 				<dl class="dl-horizontal">
-					<dt>Last Updated At:</dt>
-					<dd>{{ date('D y/n/j h:m', strtotime($post->updated_at)) }}</dd>
+					<label>Last Updated At:</label>
+					<p>{{ date('D y/n/j h:m', strtotime($post->updated_at)) }}</p>
 				</dl>
 				<hr>
 				<div class="row">
