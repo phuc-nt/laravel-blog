@@ -15,4 +15,7 @@ Route::get('/', 'PagesController@getIndex');
 Route::get('about', 'PagesController@getAbout');
 Route::get('contact', 'PagesController@getContact');
 
+// [\w\d\-\_]+  => chi nhan cac ky tu alphabet + number + - + _
+Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
+
 Route::resource('posts', 'PostController');
