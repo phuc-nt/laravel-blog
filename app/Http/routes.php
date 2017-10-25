@@ -11,15 +11,24 @@
 |
 */
 
-// Pages routes
+// Authentication Routes
+Route::get('auth/login', ['as' => 'auth.getlogin', 'uses' => 'Auth\AuthController@getLogin']);
+Route::post('auth/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@postLogin']);
+Route::get('auth/logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout']);
+
+// Registration Routes
+Route::get('auth/register', ['as' => 'auth.getregister', 'uses' => 'Auth\AuthController@getRegister']);
+Route::post('auth/register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@postRegister']);
+
+// Pages Routes
 Route::get('/', 'PagesController@getIndex');
 Route::get('about', 'PagesController@getAbout');
 Route::get('contact', 'PagesController@getContact');
 
-// Blog routes
+// Blog Routes
 Route::get('blog', ['as' => 'blog.index', 'uses' => 'BlogController@getIndex']);
 // -> [\w\d\-\_]+  => chi nhan cac ky tu alphabet + number + - + _
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
 
-// Posts routes
+// Posts Routes
 Route::resource('posts', 'PostController');
