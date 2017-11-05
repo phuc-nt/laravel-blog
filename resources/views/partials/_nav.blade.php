@@ -1,4 +1,3 @@
-Nav bar -->
 <nav class="navbar navbar-default">
   <div class="container-fluid">
 
@@ -39,7 +38,6 @@ Nav bar -->
             </ul>
           </li>
         @endif
-
         
       </ul>
     </div><!-- /.navbar-collapse -->
