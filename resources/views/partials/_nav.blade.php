@@ -30,7 +30,11 @@
             <li><a href="#">Function 2</a></li>
             <li><a href="#">Function 3</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Logout</a></li>
+            @if (Auth::check() === false)
+              <li><a href="{{ route('auth.loginForm') }}">Login</a></li>
+            @else
+              <li><a href="{{ route('auth.logout') }}">Logout</a></li>
+            @endif
           </ul>
         </li>
       </ul>

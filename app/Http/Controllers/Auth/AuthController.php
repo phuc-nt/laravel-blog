@@ -37,18 +37,18 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);
     }
 
-    public function getLogin()
-    {
-        return view('auth.login');
-    }
+    // public function getLogin()
+    // {
+    //     return view('auth.login');
+    // }
 
-    public function getRegister()
-    {
-        return view('auth.register');
-    }
+    // public function getRegister()
+    // {
+    //     return view('auth.register');
+    // }
 
     /**
      * Get a validator for an incoming registration request.

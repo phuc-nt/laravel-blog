@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+use Session;
+
 class Authenticate
 {
     /**
@@ -21,7 +23,11 @@ class Authenticate
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('login');
+                //set flash data with warning message
+                Session::flash('warning', 'You are not login yet!');
+
+                // redirect to Login page
+                return redirect()->guest('auth/login');
             }
         }
 

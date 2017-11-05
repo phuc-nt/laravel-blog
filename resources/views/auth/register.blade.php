@@ -23,8 +23,8 @@
 			{{ Form::label('password', 'Password: ', ['class' => 'form-spacing-top']) }}
 			{{ Form::password('password', ['class' => 'form-control', 'required' => '']) }}
 
-			{{ Form::label('password_comfirmation', 'Password Confirm: ', ['class' => 'form-spacing-top']) }}
-			{{ Form::password('password_comfirmation', ['class' => 'form-control', 'required' => '']) }}
+			{{ Form::label('password_confirmation', 'Password Confirm: ', ['class' => 'form-spacing-top']) }}
+			{{ Form::password('password_confirmation', ['class' => 'form-control', 'required' => '']) }}
 
 			{{ Form::submit('Register', ['class' => 'btn btn-primary btn-lg btn-block form-spacing-top']) }}
 		{!! Form::close() !!}
