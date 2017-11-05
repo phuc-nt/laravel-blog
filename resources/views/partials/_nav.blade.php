@@ -1,4 +1,4 @@
-<!-- Nav bar -->
+Nav bar -->
 <nav class="navbar navbar-default">
   <div class="container-fluid">
 
@@ -23,22 +23,26 @@
         {{-- <li class="{{ Request::is('posts') ? "active" : "" }}"><a href="/posts">Posts</a></li> --}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My account <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ route('posts.index') }}">Posts</a></li>
-            <li><a href="#">Function 2</a></li>
-            <li><a href="#">Function 3</a></li>
-            <li role="separator" class="divider"></li>
-            @if (Auth::check() === false)
-              <li><a href="{{ route('auth.loginForm') }}">Login</a></li>
-            @else
+        {{-- When logout, show Login button --}}
+        @if (Auth::check() === false)
+          <li><a href="{{ route('auth.loginForm') }}">Login</a></li>
+        {{-- When login, show User's name and function dropdown --}}
+        @else
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ route('posts.index') }}">Posts</a></li>
+              <li><a href="#">Function 2</a></li>
+              <li><a href="#">Function 3</a></li>
+              <li role="separator" class="divider"></li>
               <li><a href="{{ route('auth.logout') }}">Logout</a></li>
-            @endif
-          </ul>
-        </li>
+            </ul>
+          </li>
+        @endif
+
+        
       </ul>
     </div><!-- /.navbar-collapse -->
     
   </div><!-- /.container-fluid -->
-</nav><!-- end of Nav bar -->
+</nav><!-- end of Nav bar
