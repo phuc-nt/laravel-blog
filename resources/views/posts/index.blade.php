@@ -32,7 +32,7 @@
     		<thead>
     			<th>#</th>
     			<th>Title</th>
-    			<th>Slug</th>
+    			<th>Category</th>
     			<th>Body</th>
     			<th>Created At</th>
     			<th>Updated At</th>
@@ -45,7 +45,7 @@
 					<tr>
 						<th>{{ $post->id }}</th>
 						<td>{{ $post->title }}</td>
-						<td>{{ $post->slug }}</td>
+						<td>{{ $post->category->name }}</td>
 						<td>{{ mb_substr($post->body, 0, 50) }}{{ strlen($post->body) > 50 ? "..." : "" }}</td>
 						<td>{{ date('D y/n/j h:m', strtotime($post->created_at)) }}</td>
 						<td>{{ date('D y/n/j h:m', strtotime($post->updated_at)) }}</td>

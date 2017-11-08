@@ -25,6 +25,7 @@
         {{-- When logout, show Login button --}}
         @if (Auth::check() === false)
           <li><a href="{{ route('auth.loginForm') }}">Login</a></li>
+          <li><a href="{{ route('auth.registerForm') }}">Register</a></li>
         {{-- When login, show User's name and function dropdown --}}
         @else
           <li class="dropdown">

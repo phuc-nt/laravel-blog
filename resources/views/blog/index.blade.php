@@ -20,7 +20,7 @@
       @foreach ($posts as $post)
         <div class="post">
           <h3>{{ $post->title }}</h3>
-          <h5><i>Published: {{ date('D y/n/j h:m', strtotime($post->created_at)) }}</i></h5>
+          <h5>{{ $post->category->name }} | <i>Published: {{ date('D y/n/j h:m', strtotime($post->created_at)) }}</i></h5>
           <p>{{ mb_substr($post->body, 0, 300) }}{{ strlen($post->body) > 300 ? "..." : "" }}</p>
           <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-primary">Read more</a>
         </div>
