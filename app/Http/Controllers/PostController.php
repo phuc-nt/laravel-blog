@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Post;
+use App\Category;
 use Session;
 
 class PostController extends Controller
@@ -39,7 +40,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        // get all Categories
+        $categories = Category::all();
+
+        return view('posts.create')->with('categories', $categories);
     }
 
     /**
@@ -52,17 +56,19 @@ class PostController extends Controller
     {
         //validate data
         $this->validate($request, [
-                'title' => 'required|max:255',
-                'slug'  => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'body'  => 'required'
+                'title'         => 'required|max:255',
+                'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'category_id'   => 'required|integer',
+                'body'          => 'required'
             ]);
 
         //store in database
         $post = new Post;
 
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->body = $request->body;
+        $post->title        = $request->title;
+        $post->slug         = $request->slug;
+        $post->category_id  = $request->category_id;
+        $post->body         = $request->body;
 
         $post->save();
 
@@ -99,8 +105,15 @@ class PostController extends Controller
         // get Post by id
         $post = Post::find($id);
 
+        // get all Categories
+        $categories = Category::all();
+        $cats = array();
+        foreach ($categories as $category) {
+            $cats[$category->id] = $category->name;
+        }
+
         // redirect to Edit page with Post
-        return view('posts.edit')->with('post', $post);
+        return view('posts.edit')->with('post', $post)->with('categories', $cats);
     }
 
     /**
@@ -117,21 +130,24 @@ class PostController extends Controller
         //validate data
         if ($request->input('slug') == $post->slug) {
             $this->validate($request, [
-                'title' => 'required|max:255',
-                'body' => 'required'
+                'title'         => 'required|max:255',
+                'category_id'   => 'required|integer',
+                'body'          => 'required'
             ]);
         } else {
             $this->validate($request, [
-                'title' => 'required|max:255',
-                'slug'  => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'body' => 'required'
+                'title'         => 'required|max:255',
+                'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'category_id'   => 'required|integer',
+                'body'          => 'required'
             ]);
         }
         
         //update in database
-        $post->title = $request->input('title');
-        $post->slug = $request->input('slug');
-        $post->body = $request->input('body');
+        $post->title        = $request->input('title');
+        $post->slug         = $request->input('slug');
+        $post->category_id  = $request->category_id;
+        $post->body         = $request->input('body');
 
         $post->save();
 

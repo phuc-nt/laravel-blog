@@ -17,13 +17,22 @@
     			{{ Form::label('title', 'Title: ') }}
 				{{ Form::text('title', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '225' ]) }}
 
-				{{ Form::label('slug', 'Slug: ') }}
+				{{ Form::label('slug', 'Slug: ', ['class' => 'form-spacing-top']) }}
 				{{ Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '225' ]) }}
 
-				{{ Form::label('body', 'Body: ') }}
+				{{ Form::label('category_id', 'Category: ', ['class' => 'form-spacing-top']) }}
+				<select name="category_id" id="" class="form-control">
+					
+					@foreach ($categories as $category)
+						<option value="{{ $category->id }}">{{ $category->name }}</option>
+					@endforeach
+				
+				</select>
+
+				{{ Form::label('body', 'Body: ', ['class' => 'form-spacing-top']) }}
 				{{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '' ]) }}
 
-				{{ Form::submit('Create', [	'class' => 'btn btn-success btn-lg btn-block', 'style' => 'margin-top:10px' ]) }}
+				{{ Form::submit('Create', [	'class' => 'btn btn-success btn-lg btn-block btn-h1-spacing']) }}
 			{!! Form::close() !!}
 		</div>
 	</div>

@@ -19,6 +19,23 @@
 			{{ Form::label('slug', 'Slug: ', ['class' => 'form-spacing-top']) }}
 			{{ Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '225' ]) }}
 
+			{{ Form::label('category_id', 'Category: ', ['class' => 'form-spacing-top']) }}
+			{{ Form::select('category_id', $categories, null, ['class' => 'form-control', 'required' => '' ]) }}
+
+				{{-- <select name="category_id" id="" class="form-control">
+					
+					@foreach ($categories as $category)
+
+						@if($post->category->id === $category->id)
+						   	<option value="{{ $category->id }}" selected="selected">{{ $category->name }}</option>
+						@else
+						    <option value="{{ $category->id }}" selected="">{{ $category->name }}</option>
+						@endif
+
+					@endforeach
+				
+				</select> --}}
+
 			{{ Form::label('body', 'Body:', ['class' => 'form-spacing-top']) }}
 			{{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '' ]) }}
 		</div>
