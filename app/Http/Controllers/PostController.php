@@ -12,6 +12,7 @@ use Session;
 
 class PostController extends Controller
 {
+    // Check authen, just logged in user can access
     public function __construct()
     {
         $this->middleware('auth');
