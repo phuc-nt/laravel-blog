@@ -39,3 +39,5 @@ Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getS
 Route::resource('posts', 'PostController');
 // Categories Routes
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
+// Categories Routes
+Route::resource('tags', 'TagController', ['except' => ['create']]);

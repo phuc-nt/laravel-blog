@@ -4,14 +4,14 @@
   {!! Html::style('css/parsley.css') !!}	
 @endsection
 
-@section('title', ' | All Categories')
+@section('title', ' | All Tags')
 
 @section('content')
 
 <div class="row">
 	
 	<div class="col-md-8">
-		<h1>All Categories</h1>
+		<h1>All Tags</h1>
 		<hr>
 
 		<table class="table">
@@ -22,14 +22,14 @@
     		</thead>
 
     		<tbody>
-				@foreach ($categories as $category)
+				@foreach ($tags as $tag)
 					
 					<tr>
-						<th>{{ $category->id }}</th>
-						<td>{{ $category->name }}</td>
-						<td>{{ date('D y/n/j h:m', strtotime($category->created_at)) }}</td>
+						<th>{{ $tag->id }}</th>
+						<td>{{ $tag->name }}</td>
+						<td>{{ date('D y/n/j h:m', strtotime($tag->created_at)) }}</td>
 						<td>
-							{!! Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'DELETE']) !!}
+							{!! Form::open(['route' => ['tags.destroy', $tag->id], 'method' => 'DELETE']) !!}
 		        				{{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm' ]) }}
 		 					{!! Form::close() !!}
 						</td>
@@ -40,14 +40,14 @@
 		</table>
 
 		<div class="text-center">
-			{!! $categories->links(); !!}
+			{!! $tags->links(); !!}
 		</div>
 	</div>
 
 	<div class="col-md-3 col-md-offset-1">
 		<div class="well">
-			{!! Form::open(['route' => 'categories.store', 'methode' => 'POST', 'data-parsley-validate' => '']) !!}
-				<h2>New Category</h2>
+			{!! Form::open(['route' => 'tags.store', 'methode' => 'POST', 'data-parsley-validate' => '']) !!}
+				<h2>New Tag</h2>
 
 				{{ Form::label('name', 'Name: ') }}
 				{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '225' ]) }}

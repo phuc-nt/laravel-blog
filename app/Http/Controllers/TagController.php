@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Category;
+use App\Tag;
 use Session;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     // Check authen, just logged in user can access
     public function __construct()
@@ -26,10 +26,20 @@ class CategoryController extends Controller
     public function index()
     {
         // get all Categories
-        $categories = Category::orderBy('id', 'desc')->paginate(10);
+        $tags = Tag::orderBy('id', 'desc')->paginate(10);
 
         // redirect to Index page with all PoCategoriessts
-        return view('categories.index')->with('categories', $categories);
+        return view('tags.index')->with('tags', $tags);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -46,15 +56,15 @@ class CategoryController extends Controller
             ]);
 
         //store in database
-        $category = new Category;
-        $category->name = $request->name;
-        $category->save();
+        $tag = new Tag;
+        $tag->name = $request->name;
+        $tag->save();
 
         //set flash data with success message
-        Session::flash('success', 'New Category was successfully saved');
+        Session::flash('success', 'New Tag was successfully saved');
 
         //redirect to another page
-        return redirect()->route('categories.index');
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -99,16 +109,16 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        // get Category by id
-        $category = Category::find($id);
+        // get Tag by id
+        $tag = Tag::find($id);
 
-        // delete Category from DB
-        $category->delete();
+        // delete Tag from DB
+        $tag->delete();
 
         //set flash data with success message
-        Session::flash('success', 'The Category ' . $id . ' was successfully deleted');
+        Session::flash('success', 'The Tag ' . $id . ' was successfully deleted');
 
         // redirect to Welcome page
-        return redirect()->route('categories.index');
+        return redirect()->route('tags.index');
     }
 }
