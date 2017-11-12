@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use Session;
 
 class PostController extends Controller
@@ -43,7 +44,10 @@ class PostController extends Controller
         // get all Categories
         $categories = Category::all();
 
-        return view('posts.create')->with('categories', $categories);
+        // get all Tags
+        $tags = Tag::all();
+
+        return view('posts.create')->with('categories', $categories)->with('tags', $tags);
     }
 
     /**
@@ -54,6 +58,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
+
         //validate data
         $this->validate($request, [
                 'title'         => 'required|max:255',
@@ -71,6 +77,9 @@ class PostController extends Controller
         $post->body         = $request->body;
 
         $post->save();
+
+        //save tags without overwrite
+        $post->tags()->sync($request->tags, false);
 
         //set flash data with success message
         Session::flash('success', 'The post was successfully saved');
@@ -112,8 +121,15 @@ class PostController extends Controller
             $cats[$category->id] = $category->name;
         }
 
-        // redirect to Edit page with Post
-        return view('posts.edit')->with('post', $post)->with('categories', $cats);
+        // get all Tags
+        $tags = Tag::all();
+        $ts = array();
+        foreach ($tags as $tag) {
+            $ts[$tag->id] = $tag->name;
+        }
+
+        // redirect to Edit page with Post, Categories and Tags
+        return view('posts.edit')->with('post', $post)->with('categories', $cats)->with('tags', $ts);
     }
 
     /**
@@ -150,6 +166,13 @@ class PostController extends Controller
         $post->body         = $request->input('body');
 
         $post->save();
+
+        //overwrite old tags and save new tags
+        if (isset($request->tags)) {
+            $post->tags()->sync($request->tags, true);
+        } else {
+            $post->tags()->sync([], true);
+        }
 
         //set flash data with success message
         Session::flash('success', 'The post was successfully updated');

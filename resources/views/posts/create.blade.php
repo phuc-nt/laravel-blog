@@ -1,7 +1,8 @@
 @extends('main')
 
 @section('stylesheets')
-  {!! Html::style('css/parsley.css') !!}
+  	{!! Html::style('css/parsley.css') !!}
+  	{!! Html::style('css/select2.min.css') !!}
 @endsection
 
 @section('title', ' | Create new Post')
@@ -29,6 +30,15 @@
 				
 				</select>
 
+				{{ Form::label('tags', 'Tags: ', ['class' => 'form-spacing-top']) }}
+				<select name="tags[]" id="" class="form-control js-select2-multiple" multiple="multiple">
+					
+					@foreach ($tags as $tag)
+						<option value="{{ $tag->id }}">{{ $tag->name }}</option>
+					@endforeach
+				
+				</select>
+
 				{{ Form::label('body', 'Body: ', ['class' => 'form-spacing-top']) }}
 				{{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '' ]) }}
 
@@ -40,6 +50,13 @@
 @endsection
 
 @section('scripts')
-  {!! Html::script('js/parsley.min.js') !!}
+  	{!! Html::script('js/parsley.min.js') !!}
+  	{!! Html::script('js/select2.min.js') !!}
+
+  	<script>
+	  	$(document).ready(function() {
+		    $('.js-select2-multiple').select2();
+		});
+  	</script>
 @endsection
 

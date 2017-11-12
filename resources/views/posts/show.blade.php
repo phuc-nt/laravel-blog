@@ -13,7 +13,14 @@
 	<!-- Post contents -->
    	<div class="col-md-8">
 		<h1>{{ $post->title }}</h1>
+		<div class="tags">
+			@foreach ($post->tags as $tag)
+				<span class="label label-default">{{ $tag->name }}</span>
+			@endforeach
+		</div>
+		<hr>
 		<p class="">{{ $post->body }}</p>
+		
 	</div>
 	
 	<!-- Side bar -->

@@ -2,6 +2,7 @@
 
 @section('stylesheets')
 	{!! Html::style('css/parsley.css') !!}
+  	{!! Html::style('css/select2.min.css') !!}
 @endsection
 
 @section('title', ' | Edit Post')
@@ -22,19 +23,8 @@
 			{{ Form::label('category_id', 'Category: ', ['class' => 'form-spacing-top']) }}
 			{{ Form::select('category_id', $categories, null, ['class' => 'form-control', 'required' => '' ]) }}
 
-				{{-- <select name="category_id" id="" class="form-control">
-					
-					@foreach ($categories as $category)
-
-						@if($post->category->id === $category->id)
-						   	<option value="{{ $category->id }}" selected="selected">{{ $category->name }}</option>
-						@else
-						    <option value="{{ $category->id }}" selected="">{{ $category->name }}</option>
-						@endif
-
-					@endforeach
-				
-				</select> --}}
+			{{ Form::label('tags', 'Tags: ', ['class' => 'form-spacing-top']) }}
+			{{ Form::select('tags[]', $tags, null, ['class' => 'form-control js-select2-multiple', 'multiple' => 'multiple']) }}
 
 			{{ Form::label('body', 'Body:', ['class' => 'form-spacing-top']) }}
 			{{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '' ]) }}
@@ -80,4 +70,13 @@
 
 @section('scripts')
 	{!! Html::script('js/parsley.min.js') !!}
+  	{!! Html::script('js/select2.min.js') !!}
+
+  	<script>
+	  	$(document).ready(function() {
+		    $('.js-select2-multiple').select2();
+
+		    $('.js-select2-multiple').select2().val({{ json_encode($post->tags()->getRelatedIds()) }}).trigger('change')
+		});
+  	</script>
 @endsection
