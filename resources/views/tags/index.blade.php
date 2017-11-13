@@ -19,6 +19,7 @@
     			<th>#</th>
     			<th>Name</th>
     			<th>Created At</th>
+    			<th></th>
     		</thead>
 
     		<tbody>
@@ -29,9 +30,8 @@
 						<td>{{ $tag->name }}</td>
 						<td>{{ date('D y/n/j h:m', strtotime($tag->created_at)) }}</td>
 						<td>
-							{!! Form::open(['route' => ['tags.destroy', $tag->id], 'method' => 'DELETE']) !!}
-		        				{{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm' ]) }}
-		 					{!! Form::close() !!}
+							{!! Html::linkRoute('tags.show', 'View', [$tag->id], ['class' => 'btn btn-sm btn-success']) !!}
+							{!! Html::linkRoute('tags.edit', 'Edit', [$tag->id], ['class' => 'btn btn-sm btn-primary']) !!}
 						</td>
 					</tr>
 
@@ -46,13 +46,13 @@
 
 	<div class="col-md-3 col-md-offset-1">
 		<div class="well">
-			{!! Form::open(['route' => 'tags.store', 'methode' => 'POST', 'data-parsley-validate' => '']) !!}
+			{!! Form::open(['route' => 'tags.store', 'method' => 'POST', 'data-parsley-validate' => '']) !!}
 				<h2>New Tag</h2>
 
 				{{ Form::label('name', 'Name: ') }}
 				{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '225' ]) }}
 
-				{{ Form::submit('Create', [	'class' => 'btn btn-success btn-block btn-h1-spacing']) }}
+				{{ Form::submit('Create', [	'class' => 'btn btn-primary btn-block btn-h1-spacing']) }}
 
 			{!! Form::close() !!}
 		</div>

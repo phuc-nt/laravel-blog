@@ -76,7 +76,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        // get Category by id
+        $category = Category::find($id);
+
+        // redirect to Edit page with Category
+        return view('categories.edit')->with('category', $category);
     }
 
     /**
@@ -88,7 +92,23 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate data
+        $this->validate($request, [
+                'name' => 'required|max:255'
+            ]);
+
+        // get Category by id
+        $category = Category::find($id);
+
+        //store in database
+        $category->name = $request->name;
+        $category->save();
+
+        //set flash data with success message
+        Session::flash('success', 'Category '.$id.' was successfully updated');
+
+        //redirect to another page
+        return redirect()->route('categories.index');
     }
 
     /**
