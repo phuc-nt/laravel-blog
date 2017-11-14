@@ -65,7 +65,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        // Get Category by ID
+        $category = Category::find($id);
+
+        // Return to show view with Category
+        return view('categories.show')->with('category', $category);
     }
 
     /**
