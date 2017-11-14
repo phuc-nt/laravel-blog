@@ -124,6 +124,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        // set all related posts to General Category
         Post::whereCategoryId($id)->update(['category_id' => 1]);
 
         // get Category by id

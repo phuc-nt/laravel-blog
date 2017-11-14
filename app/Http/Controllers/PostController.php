@@ -79,7 +79,9 @@ class PostController extends Controller
         $post->save();
 
         //save tags without overwrite
-        $post->tags()->sync($request->tags, false);
+        if (isset($request->tags)) {
+            $post->tags()->sync($request->tags, false);
+        }
 
         //set flash data with success message
         Session::flash('success', 'The post was successfully saved');
