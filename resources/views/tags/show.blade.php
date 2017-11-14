@@ -13,8 +13,14 @@
 		<h1>"{{ $tag->name }}" Tag <small>( {{ $tag->posts()->count() }} Posts )</small></h1>
 	</div>
 
-	<div class="col-md-4">
-		<a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary btn-lg pull-right btn-h1-spacing">Edit</a>
+	<div class="col-md-2">
+		<a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary btn-lg btn-block btn-h1-spacing">Edit</a>
+	</div>
+
+	<div class="col-md-2">
+		{!! Form::open(['route' => ['tags.destroy', $tag->id], 'method' => 'DELETE']) !!}
+			{{ Form::submit('Delete', ['class' => 'btn btn-danger btn-lg btn-block btn-h1-spacing' ]) }}
+		{!! Form::close() !!}
 	</div>
 
 	<div class="col-md-12"><hr></div>

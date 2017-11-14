@@ -19,6 +19,8 @@
     			<th>#</th>
     			<th>Name</th>
     			<th>Created At</th>
+    			<th></th>
+    			<th></th>
     		</thead>
 
     		<tbody>
@@ -30,6 +32,8 @@
 						<td>{{ date('D y/n/j h:m', strtotime($category->created_at)) }}</td>
 						<td>
 							{!! Html::linkRoute('categories.edit', 'Edit', [$category->id], ['class' => 'btn btn-sm btn-primary']) !!}
+						</td>
+						<td>
 							{!! Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'DELETE']) !!}
 		        				{{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm' ]) }}
 		 					{!! Form::close() !!}

@@ -192,11 +192,14 @@ class PostController extends Controller
         // get Post by id
         $post = Post::find($id);
 
+        // remove references Tags
+        $post->tags()->detach();
+
         // delete Post from DB
         $post->delete();
 
         //set flash data with success message
-        Session::flash('success', 'The post ' . $id . ' was successfully deleted');
+        Session::flash('success', 'The Post ' . $id . ' was successfully deleted');
 
         // redirect to Welcome page
         return redirect()->route('posts.index');

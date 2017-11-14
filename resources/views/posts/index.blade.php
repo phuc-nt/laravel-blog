@@ -14,8 +14,8 @@
 		<h1>All Posts</h1>
 	</div>
 
-	<div class="col-md-4">
-		<a href="{{ route('posts.create') }}" class="btn btn-lg btn-primary btn-lg pull-right btn-h1-spacing">Create New Post</a>
+	<div class="col-md-2 col-md-offset-2">
+		<a href="{{ route('posts.create') }}" class="btn btn-lg btn-primary btn-block btn-h1-spacing">Create New Post</a>
 		<!--
 		{!!  Html::linkRoute('posts.create', 'Create New Post', null, ['class' => 'btn btn-lg btn-primary btn-block']) !!}
 		-->
