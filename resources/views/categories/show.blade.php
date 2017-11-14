@@ -33,8 +33,9 @@
     		<thead>
     			<th>#</th>
     			<th>Title</th>
-    			<th>Category</th>
     			<th>Tags</th>
+    			<th>Created At</th>
+    			<th>Updated At</th>
     			<th></th>
     		</thead>
 
@@ -44,7 +45,6 @@
 					<tr>
 						<th>{{ $post->id }}</th>
 						<td>{{ $post->title }}</td>
-						<td>{{ $post->category->name }}</td>
 						<td>
 							<div class="tags">
 								@foreach ($post->tags as $tag)
@@ -52,6 +52,8 @@
 								@endforeach
 							</div>
 						</td>
+						<td>{{ date('D y/n/j h:m', strtotime($post->created_at)) }}</td>
+						<td>{{ date('D y/n/j h:m', strtotime($post->updated_at)) }}</td>
 						<td>
 							<a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-success">View</a>
 						</td>

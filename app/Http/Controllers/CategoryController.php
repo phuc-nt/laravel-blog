@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Category;
+use App\Post;
 use Session;
 
 class CategoryController extends Controller
@@ -123,6 +124,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        Post::whereCategoryId($id)->update(['category_id' => 1]);
+
         // get Category by id
         $category = Category::find($id);
 
