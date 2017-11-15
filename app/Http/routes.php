@@ -28,7 +28,8 @@ Route::post('password/reset', ['as' => 'resetPwd', 'uses' => 'Auth\PasswordContr
 // Pages Routes
 Route::get('/', 'PagesController@getIndex');
 Route::get('about', 'PagesController@getAbout');
-Route::get('contact', 'PagesController@getContact');
+Route::get('contact', ['as' => 'contact.get', 'uses' => 'PagesController@getContact']);
+Route::post('contact', ['as' => 'contact.post', 'uses' => 'PagesController@postContact']);
 
 // Blog Routes
 Route::get('blog', ['as' => 'blog.index', 'uses' => 'BlogController@getIndex']);
