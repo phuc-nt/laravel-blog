@@ -40,5 +40,8 @@ Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getS
 Route::resource('posts', 'PostController');
 // Categories Routes
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
-// Categories Routes
+// Tags Routes
 Route::resource('tags', 'TagController', ['except' => ['create']]);
+
+// Comments Routes
+Route::post('comments/{post_id}', ['as' => 'comments.store', 'uses' => 'CommentsController@store']);

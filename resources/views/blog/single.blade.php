@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('stylesheets')
-
+  	{!! Html::style('css/parsley.css') !!}
 @endsection
 
 @section('title', " | $post->title")
@@ -9,7 +9,6 @@
 @section('content')
 	
 <div class="row">
-
 	<!-- Post contents -->
    	<div class="col-md-8 col-md-offset-2">
 		<h1>{{ $post->title }}</h1>
@@ -20,11 +19,55 @@
 		</div>
 		<hr>
 		<p>{{ $post->body }}</p>
+		<hr>
 	</div>
-
 </div>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		@foreach($post->comments as $comment)
+			<div class="comment">
+				<p><strong>Name:</strong> {{ $comment->name }}</p>
+				<p>
+					<strong>Comment:</strong>
+					</br>
+					{{ $comment->comment }}
+				</p>
+			</div>
+		@endforeach
+		<hr>
+	</div>
+</div>
+
+<div class="row">
+	<div id="comment-form" class="col-md-8 col-md-offset-2">
+		{{ Form::open(['route' => ['comments.store', $post->id], 'method' => 'POST', 'data-parsley-validate' => '']) }}
+			
+			<div class="row">
+				<div class="col-md-6">
+					{{ Form::label('name', 'Name:') }}
+					{{ Form::text('name', null, ['class' => 'form-control', 'required' => '']) }}
+				</div>
+
+				<div class="col-md-6">
+					{{ Form::label('email', 'Email:') }}
+					{{ Form::email('email', null, ['class' => 'form-control']) }}
+				</div>
+
+				<div class="col-md-12">
+					{{ Form::label('comment', 'Comment:', ['class' => 'form-spacing-top']) }}
+					{{ Form::textarea('comment', null, ['class' => 'form-control', 'required' => '', 'rows' => '4']) }}
+
+					{{ Form::submit('Add Comment', ['class' => 'btn btn-success btn-block btn-h1-spacing']) }}
+				</div>
+			</div>
+
+		{{ Form::close() }}
+	</div>
+</div>
+
 @endsection
 
 @section('scripts')
-
+	{!! Html::script('js/parsley.min.js') !!}
 @endsection
