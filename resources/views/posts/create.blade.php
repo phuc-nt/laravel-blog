@@ -40,7 +40,7 @@
 				</select>
 
 				{{ Form::label('body', 'Body: ', ['class' => 'form-spacing-top']) }}
-				{{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '' ]) }}
+				{{ Form::textarea('body', null, ['class' => 'form-control']) }}
 
 				{{ Form::submit('Create', [	'class' => 'btn btn-success btn-lg btn-block btn-h1-spacing']) }}
 			{!! Form::close() !!}
@@ -52,10 +52,16 @@
 @section('scripts')
   	{!! Html::script('js/parsley.min.js') !!}
   	{!! Html::script('js/select2.min.js') !!}
+	{!! Html::script('js/tinymce.min.js') !!}
 
   	<script>
 	  	$(document).ready(function() {
 		    $('.js-select2-multiple').select2();
+		});
+
+		tinymce.init({
+			selector: 'textarea',
+			plugins: 'link image imagetools'
 		});
   	</script>
 @endsection
