@@ -27,7 +27,7 @@
         <div class="post">
           <h3>{{ $post->title }}</h3>
           <h5><i>Published: {{ date('D y/n/j h:i', strtotime($post->created_at)) }}</i></h5>
-          <p>{{ mb_substr($post->body, 0, 300) }}{{ strlen($post->body) > 300 ? "..." : "" }}</p>
+          <p>{{ mb_substr(strip_tags($post->body), 0, 300) }}{{ strlen(strip_tags($post->body)) > 300 ? "..." : "" }}</p>
           <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-primary">Read more</a>
         </div>
 

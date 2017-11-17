@@ -19,7 +19,7 @@
 			@endforeach
 		</div>
 		<hr>
-		<p class="">{{ $post->body }}</p>
+		<p class="">{!! $post->body !!}</p>
 
 		<div id="backend-comments" style="margin-top: 50px;">
 			<h3>Comments <small>{{ $post->comments()->count() }} totals</small></h3>

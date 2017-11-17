@@ -46,7 +46,7 @@
 						<th>{{ $post->id }}</th>
 						<td>{{ $post->title }}</td>
 						<td>{{ $post->category->name }}</td>
-						<td>{{ mb_substr($post->body, 0, 50) }}{{ strlen($post->body) > 50 ? "..." : "" }}</td>
+						<td>{{ mb_substr(strip_tags($post->body), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
 						<td>{{ date('D y/n/j h:i', strtotime($post->created_at)) }}</td>
 						<td>{{ date('D y/n/j h:i', strtotime($post->updated_at)) }}</td>
 						<td>

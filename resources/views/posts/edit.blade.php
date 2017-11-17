@@ -27,7 +27,7 @@
 			{{ Form::select('tags[]', $tags, null, ['class' => 'form-control js-select2-multiple', 'multiple' => 'multiple']) }}
 
 			{{ Form::label('body', 'Body:', ['class' => 'form-spacing-top']) }}
-			{{ Form::textarea('body', null, ['class' => 'form-control', 'required' => '' ]) }}
+			{{ Form::textarea('body', null, ['class' => 'form-control']) }}
 		</div>
 		
 		<!-- Side bar -->
@@ -71,12 +71,17 @@
 @section('scripts')
 	{!! Html::script('js/parsley.min.js') !!}
   	{!! Html::script('js/select2.min.js') !!}
+  	{!! Html::script('js/tinymce.min.js') !!}
 
   	<script>
 	  	$(document).ready(function() {
 		    $('.js-select2-multiple').select2();
-
 		    $('.js-select2-multiple').select2().val({{ json_encode($post->tags()->getRelatedIds()) }}).trigger('change')
+		});
+
+		tinymce.init({
+			selector: 'textarea',
+			plugins: 'link image imagetools'
 		});
   	</script>
 @endsection
