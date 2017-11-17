@@ -20,7 +20,40 @@
 		</div>
 		<hr>
 		<p class="">{{ $post->body }}</p>
-		
+
+		<div id="backend-comments" style="margin-top: 50px;">
+			<h3>Comments <small>{{ $post->comments()->count() }} totals</small></h3>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Comment</th>
+						<th>Commented At</th>
+						<th width="70px"></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($post->comments()->orderBy('id', 'desc')->paginate(10) as $comment)
+						<tr>
+							<td>{{ $comment->name }}</td>
+							<td>{{ $comment->email }}</td>
+							<td>{{ $comment->comment }}</td>
+							<td>{{ $comment->created_at }}</td>
+							<td>
+								<a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</a>
+								<a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger">
+									<span class="glyphicon glyphicon-trash"></span>
+								</a>
+							</td>
+						</tr>
+					@endforeach
+				</tbody>	
+			</table>
+		</div>
 	</div>
 	
 	<!-- Side bar -->
