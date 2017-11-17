@@ -29,13 +29,14 @@
 			<span class="glyphicon glyphicon-comment"></span>
 			{{ $post->comments()->count() }} Comments
 		</h3>
-		@foreach($post->comments as $comment)
+		@foreach($post->comments()->orderBy('id', 'desc')->paginate(10) as $comment)
 			<div class="comment">
 				<div class="author-info">
-					<img src="" class="author-image">
+					<img src="{{ "https://www.gravatar.com/avatar/" . md5(strtolower(trim($comment->email))) }}" class="author-image">
 					<div class="author-name">
 						<h4>{{ $comment->name }}</h4>
-						<p class="comment-time">{{ $comment->created_at }}</p>
+						<p class="comment-time">{{ date('D y/n/j h:i', strtotime($comment->created_at)) }}</p>
+						{{-- <p class="comment-time">{{ $comment->created_at }}</p> --}}
 					</div>
 				</div>
 				<div class="comment-content">
@@ -43,6 +44,9 @@
 				</div>
 			</div>
 		@endforeach
+		<div class="text-center">
+			{!! $post->comments()->orderBy('id', 'desc')->paginate(10)->links(); !!}
+		</div>
 		<hr>
 	</div>
 </div>
@@ -54,17 +58,17 @@
 			<div class="row">
 				<div class="col-md-6">
 					{{ Form::label('name', 'Name:') }}
-					{{ Form::text('name', null, ['class' => 'form-control', 'required' => '']) }}
+					{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '225']) }}
 				</div>
 
 				<div class="col-md-6">
 					{{ Form::label('email', 'Email:') }}
-					{{ Form::email('email', null, ['class' => 'form-control']) }}
+					{{ Form::email('email', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '225']) }}
 				</div>
 
 				<div class="col-md-12">
 					{{ Form::label('comment', 'Comment:', ['class' => 'form-spacing-top']) }}
-					{{ Form::textarea('comment', null, ['class' => 'form-control', 'required' => '', 'rows' => '4']) }}
+					{{ Form::textarea('comment', null, ['class' => 'form-control', 'required' => '', 'minlength' => '10', 'maxlength' => '2000', 'rows' => '4']) }}
 
 					{{ Form::submit('Add Comment', ['class' => 'btn btn-success btn-block btn-h1-spacing']) }}
 				</div>

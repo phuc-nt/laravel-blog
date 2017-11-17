@@ -29,7 +29,7 @@
 					<tr>
 						<th>{{ $category->id }}</th>
 						<td>{{ $category->name }}</td>
-						<td>{{ date('D y/n/j h:m', strtotime($category->created_at)) }}</td>
+						<td>{{ date('D y/n/j h:i', strtotime($category->created_at)) }}</td>
 						<td>
 							{!! Html::linkRoute('categories.show', 'View', [$category->id], ['class' => 'btn btn-sm btn-success']) !!}
 							{!! Html::linkRoute('categories.edit', 'Edit', [$category->id], ['class' => 'btn btn-sm btn-primary']) !!}

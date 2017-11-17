@@ -52,8 +52,8 @@
 								@endforeach
 							</div>
 						</td>
-						<td>{{ date('D y/n/j h:m', strtotime($post->created_at)) }}</td>
-						<td>{{ date('D y/n/j h:m', strtotime($post->updated_at)) }}</td>
+						<td>{{ date('D y/n/j h:i', strtotime($post->created_at)) }}</td>
+						<td>{{ date('D y/n/j h:i', strtotime($post->updated_at)) }}</td>
 						<td>
 							<a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-success">View</a>
 						</td>

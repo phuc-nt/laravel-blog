@@ -28,7 +28,7 @@
 					<tr>
 						<th>{{ $tag->id }}</th>
 						<td>{{ $tag->name }}</td>
-						<td>{{ date('D y/n/j h:m', strtotime($tag->created_at)) }}</td>
+						<td>{{ date('D y/n/j h:i', strtotime($tag->created_at)) }}</td>
 						<td>
 							{!! Html::linkRoute('tags.show', 'View', [$tag->id], ['class' => 'btn btn-sm btn-success']) !!}
 							{!! Html::linkRoute('tags.edit', 'Edit', [$tag->id], ['class' => 'btn btn-sm btn-primary']) !!}

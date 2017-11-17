@@ -42,7 +42,7 @@ class CommentsController extends Controller
         //validate data
         $this->validate($request, [
                 'name'      => 'required|max:255',
-                'email'     => 'email|max:255|',
+                'email'     => 'email|required|max:255|',
                 'comment'   => 'required|min:10|max:2000'
             ]);
 
