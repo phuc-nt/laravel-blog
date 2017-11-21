@@ -11,6 +11,8 @@
 <div class="row">
 	<!-- Post contents -->
    	<div class="col-md-8 col-md-offset-2">
+		<img src="{{ asset('images/' . $post->image) }}" height="400" width="800" />
+
 		<h1>{{ $post->title }}</h1>
 		<div class="tags">
 			@foreach ($post->tags as $tag)

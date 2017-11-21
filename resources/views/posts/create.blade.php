@@ -13,7 +13,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<h1>Create New Post</h1>
 			<hr>
-			{!! Form::open(['route' => 'posts.store', 'data-parsley-validate' => '']) !!}
+			{!! Form::open(['route' => 'posts.store', 'data-parsley-validate' => '', 'files' => true]) !!}
 							
     			{{ Form::label('title', 'Title: ') }}
 				{{ Form::text('title', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '225' ]) }}
@@ -38,6 +38,9 @@
 					@endforeach
 				
 				</select>
+
+				{{ Form::label('featured_image', 'Image: ', ['class' => 'form-spacing-top']) }}
+				{{ Form::file('featured_image') }}
 
 				{{ Form::label('body', 'Body: ', ['class' => 'form-spacing-top']) }}
 				{{ Form::textarea('body', null, ['class' => 'form-control']) }}
