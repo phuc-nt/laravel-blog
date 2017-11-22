@@ -12,6 +12,7 @@ use App\Category;
 use App\Tag;
 use Session;
 use Image;
+use Storage;
 
 class PostController extends Controller
 {
@@ -66,7 +67,8 @@ class PostController extends Controller
                 'title'         => 'required|max:255',
                 'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
                 'category_id'   => 'required|integer',
-                'body'          => 'required'
+                'body'          => 'required',
+                'featured_image' => 'sometimes|image'
             ]);
 
         //store in database
@@ -156,26 +158,35 @@ class PostController extends Controller
         $post = Post::find($id);
 
         //validate data
-        if ($request->input('slug') == $post->slug) {
-            $this->validate($request, [
-                'title'         => 'required|max:255',
-                'category_id'   => 'required|integer',
-                'body'          => 'required'
-            ]);
-        } else {
-            $this->validate($request, [
-                'title'         => 'required|max:255',
-                'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'category_id'   => 'required|integer',
-                'body'          => 'required'
-            ]);
-        }
+        $this->validate($request, [
+            'title'         => 'required|max:255',
+            'slug'          => "required|alpha_dash|min:5|max:255|unique:posts,slug,$id", // them $id de tranh double check
+            'category_id'   => 'required|integer',
+            'body'          => 'required',
+            'featured_image' => 'image'
+        ]);
         
         //update in database
         $post->title        = $request->input('title');
         $post->slug         = $request->input('slug');
         $post->category_id  = $request->category_id;
         $post->body         = $request->input('body');
+
+        if ($request->hasFile('featured_image')) {
+            // add new image
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
+
+            // update DB
+            $oldFileName = $post->image;
+            $post->image = $filename;
+
+            // delete old image
+            // check Storage config in config/filesystem.php
+            Storage::delete($oldFileName);
+        }
 
         $post->save();
 
@@ -206,6 +217,9 @@ class PostController extends Controller
 
         // remove references Tags
         $post->tags()->detach();
+
+        // delete Image
+        Storage::delete($post->image);
 
         // delete Post from DB
         $post->delete();
