@@ -27,6 +27,6 @@ class BlogController extends Controller
         $post = Post::where('slug', '=', $slug)->first();
 
         // return the view and pass in the post object
-        return view('blog.single')->with('post', $post);
+        return view('blog.single2')->with('post', $post);
     }
 }

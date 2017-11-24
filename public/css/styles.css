@@ -22,12 +22,13 @@
 	margin-left: 15px;
 }
 
-.author-name>h4 {
+.author-name>h6 {
 	margin: 5px 0px;
 }
 
 .comment-time {
-	font-size: 11px;
+	margin-bottom: 10px;
+	font-size: 16px;
 	font-style: italic;
 	color: #aaa;
 }
@@ -35,7 +36,7 @@
 .comment-content {
 	clear: both;
 	margin-left: 65px;
-	font-size: 16px;
+	font-size: 20px;
 	line-height: 1.3em;
 }
 
